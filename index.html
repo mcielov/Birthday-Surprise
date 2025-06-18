@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday, Dodi!</title>
+
+  <!-- Quicksand from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  
+  <!-- Optional: Add Genty manually if you have the .woff2 file -->
+  <style>
+    @font-face {
+      font-family: 'Genty';
+      src: url('Genty.woff2') format('woff2');
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .intro {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-family: 'Genty', cursive;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .heart {
+      font-size: 48px;
+      cursor: pointer;
+      color: red;
+      margin-top: 20px;
+    }
+
+    #main-content {
+      display: none;
+      padding: 20px;
+    }
+
+    #puzzle-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    #reference {
+      width: 300px;
+    }
+
+    #puzzle-area {
+      width: 600px;
+      height: 600px;
+      border: 2px dashed #999;
+      position: relative;
+    }
+
+    #letter {
+      display: none;
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: center;
+      animation: floatAndFlip 2s ease-in-out forwards;
+    }
+
+    @keyframes floatAndFlip {
+      0% { transform: translateY(200px) rotateY(0deg); opacity: 0; }
+      100% { transform: translateY(0) rotateY(360deg); opacity: 1; }
+    }
+
+    canvas {
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="intro">
+    <h1>You said we're the perfect match...<br>Let's see how we fit together.</h1>
+    <div class="heart" onclick="startPuzzle()">❤</div>
+  </div>
+
+  <div id="main-content">
+    <div id="puzzle-container">
+      <div id="reference">
+        <img src="puzzle.jpg" alt="Reference Image" width="100%" />
+      </div>
+      <div id="puzzle-area"></div>
+    </div>
+    <div id="letter">
+      <h2 style="font-family: 'Genty', cursive;">💌 Happy Birthday, Dodi!</h2>
+      <p>
+        I hope this little surprise did, in fact, surprise you and put a smile on your face.<br><br>
+        I am beyond grateful that you were created to grace this bleak world with your presence. I still meant what I said to Mita back in December, that you're the greatest gift I've ever received.<br><br>
+        I love you more than you could ever know. You are light and love and everything good there is to exist in this lifetime. May you live out this new year of your life with happiness, good health, clarity, and love from the people who cherish and support you.<br><br>
+        It only took me 2 days to create this, but it was enough to drive me insane. So to think that you do this every day, for hours on end, gave me a renewed sense of respect for your craft and the time and effort you dedicate to it. You are an amazing coder/programmer/developer/person all around.<br><br>
+        Thank you for all your sacrifices, patience, and understanding. And above all else, thank you for being you. Never change. Continue aspiring towards big ideas. I'll always be here to give you hugs, kisses, and hearty meals to keep you going.<br><br>
+        I love you so much, Hertz. Happy Birthday, sweetheart.<br><br>
+        Love,<br>
+        Momi
+      </p>
+    </div>
+  </div>
+
+  <!-- Background music -->
+  <audio autoplay loop>
+    <source src="lola-amour-fallen.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Fireworks JS (you can add a library like fireworks-js if you want extra effects) -->
+  <script>
+    function launchFireworks() {
+      alert("🎆 Puzzle Complete! Now showing your birthday letter...");
+      // You can enhance this with an actual fireworks library if you want
+    }
+  </script>
+
+  <!-- Headbreaker puzzle script -->
+  <script src="https://flbulgarelli.github.io/headbreaker/js/headbreaker.js"></script>
+  <script>
+    function startPuzzle() {
+      document.querySelector('.intro').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+
+      const board = new headbreaker.Board('puzzle-area', {
+        width: 600,
+        height: 600,
+        proximity: 25,
+        borderFill: 1,
+        strokeWidth: 2,
+        lineSoftness: 0.18,
+        image: 'puzzle.jpg',
+        pieceSize: 4, // 4x3 = 12 pieces
+        fixed: false,
+        debug: false
+      });
+
+      board.image.onload = function () {
+        board.drawImage();
+        board.shuffle();
+      };
+
+      board.on('complete', function () {
+        document.getElementById('letter').style.display = 'block';
+        launchFireworks();
+      });
+    }
+  </script>
+</body>
+</html>
