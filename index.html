@@ -86,9 +86,8 @@
 </head>
 <body>
   <!-- AUDIO -->
-  <audio id="bg-music" loop>
+  <audio id="bg-music" autoplay loop>
     <source src="spring-snow-10cm.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
   </audio>
 
   <!-- Opener Section -->
@@ -135,11 +134,8 @@
       document.getElementById('opener').style.display = 'none';
       document.getElementById('main-content').style.display = 'block';
 
-      // Play background music
       const music = document.getElementById('bg-music');
-      music.play().catch(() => {
-        console.log("Autoplay blocked, user interaction needed");
-      });
+      music.play().catch((e) => console.log('Autoplay error:', e));
 
       const board = new headbreaker.Board('puzzle-area', {
         width: 600,
@@ -155,10 +151,10 @@
         debug: false
       });
 
-      const image = new Image();
-      image.src = 'puzzle.jpg';
-      image.onload = function () {
-        board.setImage(image);
+      const img = new Image();
+      img.src = 'puzzle.jpg';
+      img.onload = function () {
+        board.setImage(img);
         board.shuffle();
       };
 
@@ -169,7 +165,6 @@
 
     function showCelebration() {
       document.getElementById('letter').style.display = 'block';
-      // Optionally add fireworks or animation here later
     }
   </script>
 </body>
