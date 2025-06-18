@@ -140,11 +140,10 @@
       const board = new headbreaker.Board('puzzle-area', {
         width: 600,
         height: 600,
-        proximity: 25,
-        borderFill: 1,
+        proximity: 30,
+        borderFill: 0.3,
         strokeWidth: 2,
         lineSoftness: 0.18,
-        image: 'puzzle.jpg',
         rows: 3,
         columns: 4,
         fixed: false,
@@ -157,6 +156,8 @@
         board.setImage(img);
         board.shuffle();
       };
+
+      board.attach(document.getElementById('puzzle-area'));
 
       board.on('complete', function () {
         showCelebration();
