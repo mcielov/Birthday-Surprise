@@ -83,18 +83,19 @@
       to { opacity: 1; transform: scale(1); }
     }
   </style>
-
-  <!-- AUDIO -->
-  <audio id="bg-music" autoplay loop>
-  <source src="spring-snow-10cm.mp3" type="audio/mpeg">
-</audio>
 </head>
 <body>
+  <!-- AUDIO -->
+  <audio id="bg-music" loop>
+    <source src="spring-snow-10cm.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <!-- Opener Section -->
   <div class="opener" id="opener">
     <h1>You said we're the perfect match...</h1>
     <h2>Let's see how we fit together.</h2>
-    <div class="heart" onclick="startPuzzle(document.getElementById('bg-music').play();)">❤️</div>
+    <div class="heart" onclick="startPuzzle()">❤️</div>
   </div>
 
   <!-- Main Puzzle Section -->
@@ -133,6 +134,12 @@
     function startPuzzle() {
       document.getElementById('opener').style.display = 'none';
       document.getElementById('main-content').style.display = 'block';
+
+      // Play background music
+      const music = document.getElementById('bg-music');
+      music.play().catch(() => {
+        console.log("Autoplay blocked, user interaction needed");
+      });
 
       const board = new headbreaker.Board('puzzle-area', {
         width: 600,
